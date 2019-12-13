@@ -8,8 +8,9 @@ registerBlockType( 'mkaz/qrcode-block', {
 	attributes: {
 		url: {
 			type: 'string',
-			source: 'text',
-			selector: '.theurl',
+			source: 'attribute',
+			attribute: 'data-url',
+			selector: '#qrcode',
 		},
 	},
 	edit: ( { attributes, setAttributes } ) => {
@@ -25,7 +26,7 @@ registerBlockType( 'mkaz/qrcode-block', {
 	},
 	save: ( { attributes } ) => {
 		return (
-			<div className="theurl">{ attributes.url }</div>
+			<div id="qrcode" data-url={ attributes.url }></div>
 		);
 	}
 });

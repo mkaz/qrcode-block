@@ -26,3 +26,16 @@
     ));
 
  });
+
+ add_action( 'wp_enqueue_scripts', function() {
+    wp_enqueue_script( 'mkaz-qrcode-qrcodejs',
+        plugins_url( 'qrcode.min.js', __FILE__ )
+    );
+
+    wp_enqueue_script( 'mkaz-qrcode-trigger',
+        plugins_url( 'qr-trigger.js', __FILE__ ),
+        array( 'mkaz-qrcode-qrcodejs' ),
+        filemtime( plugin_dir_path( __FILE__ ) . 'qr-trigger.js' ),
+        true // in footer
+    );
+ });
