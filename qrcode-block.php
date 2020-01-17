@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * Plugin Name: QRCode Block
  * Plugin URI:  https://github.com/mkaz/qrcode-block
  * Description: A block to insert a QRCode
@@ -11,7 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
- add_action( 'init', function() {
+add_action( 'init', function() {
 
 	$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php' );
 
@@ -21,16 +21,18 @@
 		$asset_file['version']
 	);
 
+	wp_register_script( 'mkaz-qrcode-qrcodejs',
+		plugins_url( 'qrcode.min.js', __FILE__),
+	);
+
 	register_block_type( 'mkaz/qrcode-block', array(
 		'editor_script' => 'mkaz-qrcode-block-script',
 	));
 
- });
+});
 
- add_action( 'wp_enqueue_scripts', function() {
-	wp_enqueue_script( 'mkaz-qrcode-qrcodejs',
-		plugins_url( 'qrcode.min.js', __FILE__ )
-	);
+add_action( 'wp_enqueue_scripts', function() {
+	wp_enqueue_script( 'mkaz-qrcode-qrcodejs' );
 
 	wp_enqueue_script( 'mkaz-qrcode-trigger',
 		plugins_url( 'qr-trigger.js', __FILE__ ),
@@ -38,4 +40,10 @@
 		filemtime( plugin_dir_path( __FILE__ ) . 'qr-trigger.js' ),
 		true // in footer
 	);
- });
+});
+
+// load qrcode on editor screen so we can trigger
+// and show the qrcode within the editor
+add_action( 'admin_enqueue_scripts', function() {
+	wp_enqueue_script( 'mkaz-qrcode-qrcodejs' );
+} );
