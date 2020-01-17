@@ -5,11 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "build": "wp-scripts build",
+    "lint:js": "wp-scripts lint-js ./src",
     "start": "wp-scripts start"
   },
   "author": "Marcus Kazmierczak",
   "license": "ISC",
   "devDependencies": {
-    "@wordpress/scripts": "^6.0.0"
+    "@wordpress/scripts": "^6.2.0"
   }
 }
