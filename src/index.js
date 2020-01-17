@@ -18,4 +18,4 @@ registerBlockType( 'mkaz/qrcode-block', {
 	edit,
 	save,
 
-});
+} );
